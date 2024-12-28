@@ -495,8 +495,7 @@ async def compare_versions(v1, v2):
     return "Already up to date with latest version"
 
 
-async def get_stats(event, key="home"):
-    commands = {
+commands = {
     "aria2": (["aria2c", "--version"], r"aria2 version ([\d.]+)"),
     "qBittorrent": (["qbittorrent-nox", "--version"], r"qBittorrent v([\d.]+)"),
     "python": (["python3", "--version"], r"Python ([\d.]+)"),
@@ -507,6 +506,8 @@ async def get_stats(event, key="home"):
     "mega":(["pip3", "show", "megasdk"], r"MegaSdk v[\s*([\d.]+)]"),
     "pyrogram":(["pip3", "show", "pyrofork"], r"Pyrofork v[\s*([\d.]+)]"),
     "tgcrypto":(["pip3", "show", "tgcrypto"], r"TgCrypto v[\s*([\d.]+)]")}
+
+async def get_stats(event, key="home"):
     user_id = event.from_user.id
     btns = ButtonMaker()
     btns.ibutton('Back', f'wzmlx {user_id} stats home')
