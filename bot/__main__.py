@@ -22,7 +22,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from bot import bot, user, bot_name, config_dict, user_data, botStartTime, LOGGER, Interval, DATABASE_URL, QbInterval, INCOMPLETE_TASK_NOTIFIER, scheduler, bot_cache
 from bot.version import get_version
 from .helper.ext_utils.fs_utils import start_cleanup, clean_all, exit_clean_up
-from .helper.ext_utils.bot_utils import get_readable_time, cmd_exec, sync_to_async, new_task, set_commands, update_user_ldata, get_stats
+from .helper.ext_utils.bot_utils import get_readable_time, cmd_exec, sync_to_async, new_task, set_commands, update_user_ldata, get_stats, get_packages_version
 from .helper.ext_utils.db_handler import DbManger
 from .helper.telegram_helper.bot_commands import BotCommands
 from .helper.telegram_helper.message_utils import sendMessage, editMessage, editReplyMarkup, sendFile, deleteMessage, delete_all_messages
@@ -249,7 +249,7 @@ async def log_check():
     
 
 async def main():
-    await gather(start_cleanup(), torrent_search.initiate_search_tools(), restart_notification(), search_images(), set_commands(bot), log_check())
+    await gather(start_cleanup(), torrent_search.initiate_search_tools(), restart_notification(),get_packages_version(), search_images(), set_commands(bot), log_check())
     await sync_to_async(start_aria2_listener, wait=False)
     
     bot.add_handler(MessageHandler(

@@ -40,6 +40,27 @@ class WZMLStyle:
     HELP_HEADER = "㊂ <b><i>Help Guide Menu!</i></b>\n\n<b>NOTE: <i>Click on any CMD to see more minor detalis.</i></b>"
 
     # async def stats(client, message):
+
+    ENG_INFO = ''' <b><i><u>🚀Jet Bot Engine Info</u></i></b>
+
+┎ <b> 🐍 Main Dependencies :
+┠ <b>Python3:</b> {pyt}
+┠ <b>Pyrogram:</b> {pgram}
+┖ <b>TgCrypto:</b> {tgcr}
+
+┎ <b> ❄️ Required Dependencies :
+┠ <b>Aria2:</b> {ar}
+┠ <b>qBittorrent:</b> {qb}
+┠ <b>Yt-Dlp:</b> {yt}
+┠ <b>FFmpeg:</b> {ff}
+┠ <b>7z:</b> {zz}
+┠ <b>Mega:</b> {me}
+┖ <b>Rclone:</b> {rcl}
+
+<a href="https://t.me/JetMirror">𝑩𝒐𝒕 𝒃𝒚 🚀 𝑱𝒆𝒕-𝑴𝒊𝒓𝒓𝒐𝒓</a>
+
+    '''
+
     BOT_STATS = ''' <b><i><u>🚀Jet Bot Statistics</u></i></b>
 ┖ <b>Bot Uptime :</b> {bot_uptime}
 

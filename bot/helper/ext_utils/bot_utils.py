@@ -6,13 +6,13 @@ from os import path as ospath
 from pkg_resources import get_distribution, DistributionNotFound
 from aiofiles import open as aiopen
 from aiofiles.os import remove as aioremove, path as aiopath, mkdir
-from re import match as re_match
+from re import match as re_match,search as research
 from time import time
 from html import escape
 from uuid import uuid4
 from subprocess import run as srun
 from psutil import disk_usage, disk_io_counters, Process, cpu_percent, swap_memory, cpu_count, cpu_freq, getloadavg, virtual_memory, net_io_counters, boot_time
-from asyncio import create_subprocess_exec, create_subprocess_shell, run_coroutine_threadsafe, sleep
+from asyncio import create_subprocess_exec, create_subprocess_shell, run_coroutine_threadsafe, sleep, gather
 from asyncio.subprocess import PIPE
 from functools import partial, wraps
 from concurrent.futures import ThreadPoolExecutor
@@ -495,17 +495,47 @@ async def compare_versions(v1, v2):
     return "Already up to date with latest version"
 
 
+commands = {
+    "aria2": (["aria2c", "--version"], r"aria2 version ([\d.]+)"),
+    "qBittorrent": (["qbittorrent-nox", "--version"], r"qBittorrent v([\d.]+)"),
+    "python": (["python3", "--version"], r"Python ([\d.]+)"),
+    "rclone": (["rclone", "--version"], r"rclone v([\d.]+)"),
+    "yt-dlp": (["yt-dlp", "--version"], r"([\d.]+)"),
+    "ffmpeg": (["ffmpeg", "-version"], r"ffmpeg version ([\d.]+(-\w+)?).*"),
+    "7z": (["7z", "i"], r"7-Zip.*?([\d]+\.[\d]+)"),
+    "mega": (["pip3", "show", "megasdk"], r"Version:\s*([\d\.]+)"),
+    "pyrogram":(["pip3", "show", "pyrofork"], r"Version:\s*([\d\.]+)"),
+    "tgcrypto":(["pip3", "show", "tgcrypto"], r"Version:\s*([\d\.]+)")}
+
 async def get_stats(event, key="home"):
     user_id = event.from_user.id
     btns = ButtonMaker()
     btns.ibutton('Back', f'wzmlx {user_id} stats home')
+    if not (version_cache := bot_cache.get('eng_versions')):
+            get_all_versions()
+            version_cache = bot_cache.get('eng_versions')
     if key == "home":
         btns = ButtonMaker()
         btns.ibutton('Bot Stats', f'wzmlx {user_id} stats stbot')
         btns.ibutton('OS Stats', f'wzmlx {user_id} stats stsys')
         btns.ibutton('Repo Stats', f'wzmlx {user_id} stats strepo')
         btns.ibutton('Bot Limits', f'wzmlx {user_id} stats botlimits')
+        btns.ibutton('Engine Info', f'wzmlx {user_id} stats info')
         msg = "⌬ <b><i>Bot & OS Statistics!</i></b>"
+    elif key == "info":
+        msg = BotTheme(
+            'ENG_INFO',
+            pyt = commands["python"],
+            ar = commands["aria2"],
+            qb = commands["qBittorrent"],
+            me = commands["mega"],
+            rcl = commands["rclone"],
+            yt = commands["yt-dlp"],
+            ff = commands["ffmpeg"],
+            zz = commands["7z"],
+            pgram = commands["pyrogram"],
+            tgcr = commands["tgcrypto"],
+        )
     elif key == "stbot":
         total, used, free, disk = disk_usage('/')
         swap = swap_memory()
@@ -786,3 +816,29 @@ async def set_commands(client):
         LOGGER.info('Bot Commands have been Set & Updated')
     except Exception as err:
         LOGGER.error(err)
+
+async def get_version_async(command, regex):
+    try:
+        out, err, code = await cmd_exec(command)
+        if code != 0:
+            return f"Error: {err}"
+        match = research(regex, out)
+        return match.group(1) if match else "Version not found"
+    except Exception as e:
+        return f"Exception: {str(e)}"
+
+
+@new_task
+async def get_packages_version():
+    tasks = [get_version_async(command, regex) for command, regex in commands.values()]
+    versions = await gather(*tasks)
+    for tool, version in zip(commands.keys(), versions):
+        commands[tool] = version
+    if await aiopath.exists(".git"):
+        last_commit = await cmd_exec(
+            "git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'", True
+        )
+        last_commit = last_commit[0]
+    else:
+        last_commit = "No UPSTREAM_REPO"
+    commands["commit"] = last_commit
