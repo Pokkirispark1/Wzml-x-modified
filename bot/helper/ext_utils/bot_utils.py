@@ -6,13 +6,13 @@ from os import path as ospath
 from pkg_resources import get_distribution, DistributionNotFound
 from aiofiles import open as aiopen
 from aiofiles.os import remove as aioremove, path as aiopath, mkdir
-from re import match as re_match
+from re import match as re_match,search as research
 from time import time
 from html import escape
 from uuid import uuid4
 from subprocess import run as srun
 from psutil import disk_usage, disk_io_counters, Process, cpu_percent, swap_memory, cpu_count, cpu_freq, getloadavg, virtual_memory, net_io_counters, boot_time
-from asyncio import create_subprocess_exec, create_subprocess_shell, run_coroutine_threadsafe, sleep
+from asyncio import create_subprocess_exec, create_subprocess_shell, run_coroutine_threadsafe, sleep, gather
 from asyncio.subprocess import PIPE
 from functools import partial, wraps
 from concurrent.futures import ThreadPoolExecutor
@@ -813,3 +813,29 @@ async def set_commands(client):
         LOGGER.info('Bot Commands have been Set & Updated')
     except Exception as err:
         LOGGER.error(err)
+
+async def get_version_async(command, regex):
+    try:
+        out, err, code = await cmd_exec(command)
+        if code != 0:
+            return f"Error: {err}"
+        match = research(regex, out)
+        return match.group(1) if match else "Version not found"
+    except Exception as e:
+        return f"Exception: {str(e)}"
+
+
+@new_task
+async def get_packages_version():
+    tasks = [get_version_async(command, regex) for command, regex in commands.values()]
+    versions = await gather(*tasks)
+    for tool, version in zip(commands.keys(), versions):
+        commands[tool] = version
+    if await aiopath.exists(".git"):
+        last_commit = await cmd_exec(
+            "git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'", True
+        )
+        last_commit = last_commit[0]
+    else:
+        last_commit = "No UPSTREAM_REPO"
+    commands["commit"] = last_commit
