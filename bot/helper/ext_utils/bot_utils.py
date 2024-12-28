@@ -496,6 +496,17 @@ async def compare_versions(v1, v2):
 
 
 async def get_stats(event, key="home"):
+    commands = {
+    "aria2": (["aria2c", "--version"], r"aria2 version ([\d.]+)"),
+    "qBittorrent": (["qbittorrent-nox", "--version"], r"qBittorrent v([\d.]+)"),
+    "python": (["python3", "--version"], r"Python ([\d.]+)"),
+    "rclone": (["rclone", "--version"], r"rclone v([\d.]+)"),
+    "yt-dlp": (["yt-dlp", "--version"], r"([\d.]+)"),
+    "ffmpeg": (["ffmpeg", "-version"], r"ffmpeg version ([\d.]+(-\w+)?).*"),
+    "7z": (["7z", "i"], r"7-Zip ([\d.]+)"),
+    "mega":(["pip3", "show", "megasdk"], r"MegaSdk v[\s*([\d.]+)]"),
+    "pyrogram":(["pip3", "show", "pyrofork"], r"Pyrofork v[\s*([\d.]+)]"),
+    "tgcrypto":(["pip3", "show", "tgcrypto"], r"TgCrypto v[\s*([\d.]+)]")}
     user_id = event.from_user.id
     btns = ButtonMaker()
     btns.ibutton('Back', f'wzmlx {user_id} stats home')
@@ -505,7 +516,22 @@ async def get_stats(event, key="home"):
         btns.ibutton('OS Stats', f'wzmlx {user_id} stats stsys')
         btns.ibutton('Repo Stats', f'wzmlx {user_id} stats strepo')
         btns.ibutton('Bot Limits', f'wzmlx {user_id} stats botlimits')
+        btns.ibutton('Engine Info', f'wzmlx {user_id} stats info')
         msg = "⌬ <b><i>Bot & OS Statistics!</i></b>"
+    elif key == "info":
+        msg = BotTheme(
+            'ENG_INFO',
+            {commands["python"]},
+            {commands["aria2"]},
+            {commands["qBittorrent"]},
+            {commands["mega"]},
+            {commands["rclone"]},
+            {commands["yt-dlp"]},
+            {commands["ffmpeg"]},
+            {commands["7z"]},
+            {commands["pyrogram"]},
+            {commands["tgcrypto"]},
+        )
     elif key == "stbot":
         total, used, free, disk = disk_usage('/')
         swap = swap_memory()
