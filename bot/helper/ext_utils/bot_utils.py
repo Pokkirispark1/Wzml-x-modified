@@ -502,7 +502,7 @@ commands = {
     "rclone": (["rclone", "--version"], r"rclone v([\d.]+)"),
     "yt-dlp": (["yt-dlp", "--version"], r"([\d.]+)"),
     "ffmpeg": (["ffmpeg", "-version"], r"ffmpeg version ([\d.]+(-\w+)?).*"),
-    "7z": (["7z", "-version"], r"7-Zip ([\d.]+)"),
+    "7z": (["7z", "-version"], r"7-Zip.*?([\d\.]+)"),
     "mega": (["pip3", "show", "megasdk"], r"Version:\s*([\d\.]+)"),
     "pyrogram":(["pip3", "show", "pyrofork"], r"Version:\s*([\d\.]+)"),
     "tgcrypto":(["pip3", "show", "tgcrypto"], r"Version:\s*([\d\.]+)")}
