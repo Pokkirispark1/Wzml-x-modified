@@ -503,9 +503,9 @@ commands = {
     "yt-dlp": (["yt-dlp", "--version"], r"([\d.]+)"),
     "ffmpeg": (["ffmpeg", "-version"], r"ffmpeg version ([\d.]+(-\w+)?).*"),
     "7z": (["7z", "i"], r"7-Zip ([\d.]+)"),
-    "mega":(["pip3", "show", "megasdk"], r"MegaSdk v[\s*([\d.]+)]"),
-    "pyrogram":(["pip3", "show", "pyrofork"], r"Pyrofork v[\s*([\d.]+)]"),
-    "tgcrypto":(["pip3", "show", "tgcrypto"], r"TgCrypto v[\s*([\d.]+)]")}
+    "mega":(["pip3", "show", "megasdk"], r"MegaSdk v[\s*([\d\.]+)]"),
+    "pyrogram":(["pip3", "show", "pyrofork"], r"Pyrofork v[\s*([\d\.]+)]"),
+    "tgcrypto":(["pip3", "show", "tgcrypto"], r"TgCrypto v[\s*([\d\.]+)]")}
 
 async def get_stats(event, key="home"):
     user_id = event.from_user.id
