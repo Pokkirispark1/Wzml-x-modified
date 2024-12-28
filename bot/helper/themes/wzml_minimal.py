@@ -55,7 +55,7 @@ class WZMLStyle:
 ┠ <b>FFmpeg:</b> {ff}
 ┠ <b>7z:</b> {zz}
 ┠ <b>Mega:</b> {me}
-┖ <b>rclone:</b> {rcl}
+┖ <b>Rclone:</b> {rcl}
 
 <a href="https://t.me/JetMirror">𝑩𝒐𝒕 𝒃𝒚 🚀 𝑱𝒆𝒕-𝑴𝒊𝒓𝒓𝒐𝒓</a>
 
