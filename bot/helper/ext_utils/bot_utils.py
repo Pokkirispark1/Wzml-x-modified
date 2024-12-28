@@ -521,16 +521,16 @@ async def get_stats(event, key="home"):
     elif key == "info":
         msg = BotTheme(
             'ENG_INFO',
-            {commands["python"]},
-            {commands["aria2"]},
-            {commands["qBittorrent"]},
-            {commands["mega"]},
-            {commands["rclone"]},
-            {commands["yt-dlp"]},
-            {commands["ffmpeg"]},
-            {commands["7z"]},
-            {commands["pyrogram"]},
-            {commands["tgcrypto"]},
+            pyt = {commands["python"]},
+            ar = {commands["aria2"]},
+            qb = {commands["qBittorrent"]},
+            me = {commands["mega"]},
+            rcl = {commands["rclone"]},
+            yt = {commands["yt-dlp"]},
+            ff = {commands["ffmpeg"]},
+            zz = {commands["7z"]},
+            pgram = {commands["pyrogram"]},
+            tgcr = {commands["tgcrypto"]},
         )
     elif key == "stbot":
         total, used, free, disk = disk_usage('/')
