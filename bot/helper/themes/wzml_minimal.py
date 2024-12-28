@@ -43,7 +43,7 @@ class WZMLStyle:
 
     ENG_INFO = ''' <b><i><u>🚀Jet Bot Engine Info</u></i></b>
 
-┎ <b> 🐍 Python & Main Dependencies :
+┎ <b> 🐍 Main Dependencies :
 ┠ <b>Python3:</b> {pyt}
 ┠ <b>Pyrogram:</b> {pgram}
 ┖ <b>TgCrypto:</b> {tgcr}
