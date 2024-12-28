@@ -502,8 +502,8 @@ commands = {
     "rclone": (["rclone", "--version"], r"rclone v([\d.]+)"),
     "yt-dlp": (["yt-dlp", "--version"], r"([\d.]+)"),
     "ffmpeg": (["ffmpeg", "-version"], r"ffmpeg version ([\d.]+(-\w+)?).*"),
-    "7z": (["7z", "i"], r"7-Zip ([\d.]+)"),
-    "mega": ("pip3 show megasdk | awk '/Version/ {print $2}'", r"(.*)"),
+    "7z": (["7z", "-version"], r"7-Zip ([\d.]+)"),
+    "mega": ("pip3", "show", "megasdk", r"Version:\s*([\d\.]+)"),
     "pyrogram":(["pip3", "show", "pyrofork"], r"Pyrofork v[\s*([\d\.]+)]"),
     "tgcrypto":(["pip3", "show", "tgcrypto"], r"TgCrypto v[\s*([\d\.]+)]")}
 
@@ -511,6 +511,9 @@ async def get_stats(event, key="home"):
     user_id = event.from_user.id
     btns = ButtonMaker()
     btns.ibutton('Back', f'wzmlx {user_id} stats home')
+    if not (version_cache := bot_cache.get('eng_versions')):
+            get_all_versions()
+            version_cache = bot_cache.get('eng_versions')
     if key == "home":
         btns = ButtonMaker()
         btns.ibutton('Bot Stats', f'wzmlx {user_id} stats stbot')
