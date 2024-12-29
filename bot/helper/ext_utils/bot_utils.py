@@ -199,7 +199,7 @@ class EngineStatus:
 
 
 def get_readable_message():
-    msg = "<a href='https://t.me/JetMirror'>𝑩𝒐𝒕 𝒃𝒚 🚀 𝑱𝒆𝒕-𝑴𝒊𝒓𝒓𝒐𝒓</a>"
+    msg = "<a href='https://t.me/JetMirror'>𝑩𝒐𝒕 𝒃𝒚 🚀 𝑱𝒆𝒕-𝑴𝒊𝒓𝒓𝒐𝒓</a>\n\n"
     button = None
     STATUS_LIMIT = config_dict['STATUS_LIMIT']
     tasks = len(download_dict)
@@ -615,7 +615,7 @@ async def get_stats(event, key="home"):
                 UT = ('∞' if (val := config_dict['USER_MAX_TASKS']) == '' else val),
                 BT = ('∞' if (val := config_dict['BOT_MAX_TASKS']) == '' else val),
         )
-    btns.ibutton('Close', f'wzmlx {user_id} close')
+    btns.ibutton('❌', f'wzmlx {user_id} close', position="footer")
     return msg, btns.build_menu(2)
 
 
