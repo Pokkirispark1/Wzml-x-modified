@@ -40,7 +40,7 @@ async def stats(client, message):
 
 @new_task
 async def start(client, message):
-    sticker_message = await message.reply_sticker("CAACAgIAAxkBAAEXyPRledQ6luKt1QABSPMPi2s4rgH3xMUAAmkdAALpI4hJ8xCGgSybQv8zBA")
+    sticker_message = await message.reply_sticker("CAACAgIAAxkBAAEarGtmq8a_Hy6_Pk8IzUHRO8i1dvwDyAACFh4AAuzxOUkNYHq7o3u0ODUE")
     await asyncio.sleep(2)
     await sticker_message.delete()
     buttons = ButtonMaker()

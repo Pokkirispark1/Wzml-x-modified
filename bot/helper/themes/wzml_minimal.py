@@ -6,10 +6,10 @@ class WZMLStyle:
     ST_BN1_URL = 'https://t.me/hrishikesh2861'
     ST_BN2_NAME = '🚀 Updates 🚀'
     ST_BN2_URL = 'https://t.me/JetMirror'
-    ST_MSG = '''<i>This bot can mirror all your links|files|torrents to Google Drive or any rclone cloud or to telegram or to ddl servers. Repo used is WZML-X. And done some Modifications ❤️.</i>
+    ST_MSG = '''This bot can mirror all your links|files|torrents to Google Drive or any rclone cloud or to telegram or to ddl servers. Repo used is WZML-X. And done some Modifications ❤️.
 <b>Type {help_command} to get a list of available commands</b>'''
-    ST_BOTPM = '''<i>Now, This bot will send all your files and links here. Start Using ...</i>'''
-    ST_UNAUTH = '''<i>You Are not authorized user! Deploy your own WZML-X Mirror-Leech bot</i>'''
+    ST_BOTPM = '''Now, This bot will send all your files and links here. Start Using in <b><u>@JetMirror</u></b> ...'''
+    ST_UNAUTH = '''You Are not authorized user!\n<b>Deploy your own WZML-X Mirror-Leech bot</b>'''
     OWN_TOKEN_GENERATE = '''<b>Temporary Token is not yours!</b>\n\n<i>Kindly generate your own.</i>'''
     USED_TOKEN = '''<b>Temporary Token already used!</b>\n\n<i>Kindly generate a new one.</i>'''
     LOGGED_PASSWORD = '''<b>Bot Already Logged In via Password</b>\n\n<i>No Need to Accept Temp Tokens.</i>'''
@@ -194,7 +194,7 @@ class WZMLStyle:
     INDEX_LINK_F =    '🗂 Index Link'
     INDEX_LINK_D =    '⚡ Index Link'
     VIEW_LINK =       '🌐 View Link'
-    CHECK_PM =        '📥 View in Bot PM'
+    CHECK_PM =        '📥 View in Inbox'
     CHECK_LL =        '🖇 View in Links Log'
     MEDIAINFO_LINK =  '📃 MediaInfo'
     SCREENSHOTS =     '🖼 ScreenShots'
