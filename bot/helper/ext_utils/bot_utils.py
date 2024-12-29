@@ -44,17 +44,18 @@ PAGE_NO      = 1
 
 
 class MirrorStatus:
-    STATUS_UPLOADING   = "Upload"
-    STATUS_DOWNLOADING = "Download"
-    STATUS_CLONING     = "Clone"
-    STATUS_QUEUEDL     = "QueueDL"
-    STATUS_QUEUEUP     = "QueueUp"
-    STATUS_PAUSED      = "Pause"
-    STATUS_ARCHIVING   = "Archive"
-    STATUS_EXTRACTING  = "Extract"
-    STATUS_SPLITTING   = "Split"
-    STATUS_CHECKING    = "CheckUp"
-    STATUS_SEEDING     = "Seed"
+    STATUS_UPLOADING   = "Upload 📤"
+    STATUS_DOWNLOADING = "Download 📥"
+    STATUS_CLONING     = "Clone 🔃"
+    STATUS_QUEUEDL     = "QueueDL ⏳"
+    STATUS_QUEUEUP     = "QueueUL ⏳"
+    STATUS_PAUSED      = "Paused ⛔️"
+    STATUS_ARCHIVING   = "Archive 🛠"
+    STATUS_METADATA    = "Metadata 📝"
+    STATUS_EXTRACTING  = "Extract 📂"
+    STATUS_SPLITTING   = "Split ✂️"
+    STATUS_CHECKING    = "CheckUp ⏱"
+    STATUS_SEEDING     = "Seed 🌧"
 
 
 class setInterval:
@@ -198,7 +199,7 @@ class EngineStatus:
 
 
 def get_readable_message():
-    msg = ""
+    msg = "<a href='https://t.me/JetMirror'>𝑩𝒐𝒕 𝒃𝒚 🚀 𝑱𝒆𝒕-𝑴𝒊𝒓𝒓𝒐𝒓</a>"
     button = None
     STATUS_LIMIT = config_dict['STATUS_LIMIT']
     tasks = len(download_dict)
@@ -211,7 +212,7 @@ def get_readable_message():
             ChatType.SUPERGROUP, ChatType.CHANNEL] and not config_dict['DELETE_LINKS'] else ''
         elapsed = time() - download.message.date.timestamp()
         msg += BotTheme('STATUS_NAME', Name="Task is being Processed!" if config_dict['SAFE_MODE'] and elapsed >= config_dict['STATUS_UPDATE_INTERVAL'] else escape(f'{download.name()}'))
-        if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
+        if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING, MirrorStatus.STATUS_METADATA]:
             msg += BotTheme('BAR', Bar=f"{get_progress_bar_string(download.progress())} {download.progress()}")
             msg += BotTheme('PROCESSED', Processed=f"{download.processed_bytes()} of {download.size()}")
             msg += BotTheme('STATUS', Status=download.status(), Url=msg_link)

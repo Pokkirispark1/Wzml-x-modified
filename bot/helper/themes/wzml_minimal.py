@@ -243,7 +243,7 @@ class WZMLStyle:
     Ram = '\n┠ <b>RAM:</b> {ram}% | '
     uptime =                     '<b>UPTIME:</b> {uptime}'
     DL = '\n┖ <b>DL:</b> {DL}/s | '
-    UL =                        '<b>UL:</b> {UL}/s\n\n<a href="https://t.me/JetMirror">𝑩𝒐𝒕 𝒃𝒚 🚀 𝑱𝒆𝒕-𝑴𝒊𝒓𝒓𝒐𝒓</a>'
+    UL =                        '<b>UL:</b> {UL}/s'
 
     ###--------BUTTONS-------
     PREVIOUS = '⫷'
