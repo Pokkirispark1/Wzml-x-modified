@@ -454,13 +454,14 @@ class MirrorLeechListener:
         msg += BotTheme('MODE', Mode=self.upload_details['mode'])
         LOGGER.info(f'Task Done: {name}')
         await self.message.reply_sticker(sticker)
-
+        
+        
         buttons = ButtonMaker()
         if self.isLeech:
             msg += BotTheme('L_TOTAL_FILES', Files=folders)
             if mime_type != 0:
                 msg += BotTheme('L_CORRUPTED_FILES', Corrupt=mime_type)
-            msg += BotTheme('L_CC', Tag=self.tag, Uid=self.uid)
+            msg += BotTheme('L_CC', Tag=self.tag)
             btn_added = False
 
             if not files:
