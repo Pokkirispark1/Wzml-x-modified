@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from random import choice
+import random
 from time import time
 from copy import deepcopy
 from pytz import timezone
@@ -440,6 +441,8 @@ class MirrorLeechListener:
             await RCTransfer.upload(up_path, size)
 
     async def onUploadComplete(self, link, size, files, folders, mime_type, name, rclonePath='', private=False):
+        stickers = ["CAACAgIAAxkBAAEciiNncmARXVdY4WBnrEn5gyIHWk7sWQACYhEAAl7N2Ur3z3XSRB85OzYE", "CAACAgIAAxkBAAEciiVncmAaIDd3KKU8J1eNPDKMSgZ9sQACfTkAAmTT-UlzOiInCv3bLDYE", "CAACAgIAAxkBAAEciidncmA0DldAq_yuQ7kHQtmXXVmRrQACsA8AAt618Utgu-l5gII-ojYE", "CAACAgIAAxkBAAEciixncmA9d5-QfPjtZC9Ockwf3e120gAClRAAAhIziUs7Dhwga6PTNDYE"]
+        sticker = random.choice(stickers)
         if self.isSuperGroup and config_dict['INCOMPLETE_TASK_NOTIFIER'] and DATABASE_URL:
             await DbManger().rm_complete_task(self.message.link)
         user_id = self.message.from_user.id
@@ -450,11 +453,8 @@ class MirrorLeechListener:
         msg += BotTheme('ELAPSE', Time=get_readable_time(time() - self.message.date.timestamp()))
         msg += BotTheme('MODE', Mode=self.upload_details['mode'])
         LOGGER.info(f'Task Done: {name}')
-        sticker_message = await self.message.reply_sticker("CAACAgIAAxkBAAEcVCtnXt9Dvi16SLqhI6a8n4uW-jeGsQACjzMAAumt-UlYSD7bJ5sg1DYE")
-        await asyncio.sleep(10)
-        await sticker_message.delete()
-        
-        
+        await self.message.reply_sticker(sticker)
+
         buttons = ButtonMaker()
         if self.isLeech:
             msg += BotTheme('L_TOTAL_FILES', Files=folders)
