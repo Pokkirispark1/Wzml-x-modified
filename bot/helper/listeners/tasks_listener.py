@@ -460,7 +460,7 @@ class MirrorLeechListener:
             msg += BotTheme('L_TOTAL_FILES', Files=folders)
             if mime_type != 0:
                 msg += BotTheme('L_CORRUPTED_FILES', Corrupt=mime_type)
-            msg += BotTheme('L_CC', Tag=self.tag)
+            msg += BotTheme('L_CC', Tag=self.tag, Uid=self.uid)
             btn_added = False
 
             if not files:
