@@ -272,7 +272,7 @@ class WZMLStyle:
     # ---------------------
 
     # async def mirror_status(_, message): ----> status.py
-    NO_ACTIVE_DL = '''<i>No Active Downloads!</i>
+    NO_ACTIVE_DL = '''<b>ᴜɴɪɴsᴛᴀʟʟ ᴛᴇʟᴇɢʀᴀᴍ ᴀɴᴅ ᴇɴᴊᴏʏ ʏᴏᴜʀ ʟɪғᴇ!!</b>\n\nɴᴏ ᴅᴏᴡɴʟᴏᴀᴅs ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ɪɴ ᴘʀᴏɢʀᴇss.
     
 ⌬ <b><i>Bot Stats</i></b>
 ┠ <b>CPU:</b> {cpu}% | <b>F:</b> {free} [{free_p}%]

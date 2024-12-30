@@ -11,6 +11,7 @@ from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import sendMessage, editMessage, deleteMessage, auto_delete_message, sendStatusMessage, user_info, update_all_messages, delete_all_messages
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time, turn_page, setInterval, new_task
 from bot.helper.themes import BotTheme
+from quoters import Quote
 
 
 @new_task
@@ -20,10 +21,13 @@ async def mirror_status(_, message):
     await sticker_message.delete()
     async with download_dict_lock:
         count = len(download_dict)
+    quote = Quote.print().split('―', 1)[0].strip().replace("“", "").replace("”", "")
     if count == 0:
         currentTime = get_readable_time(time() - botStartTime)
         free = get_readable_file_size(disk_usage(config_dict['DOWNLOAD_DIR']).free)
-        msg = BotTheme('NO_ACTIVE_DL', cpu=cpu_percent(), free=free, free_p=round(100-disk_usage(config_dict['DOWNLOAD_DIR']).percent, 1),
+        msg = f'<b>{quote} ❤️</b>\n\n'
+        msg += f"<b><a href='https://t.me/JetMirror'>𝑩𝒐𝒕 𝒃𝒚 🚀 𝑱𝒆𝒕-𝑴𝒊𝒓𝒓𝒐𝒓</a></b>\n\n"
+        msg += BotTheme('NO_ACTIVE_DL', cpu=cpu_percent(), free=free, free_p=round(100-disk_usage(config_dict['DOWNLOAD_DIR']).percent, 1),
                        ram=virtual_memory().percent, uptime=currentTime)
         reply_message = await sendMessage(message, msg)
         await auto_delete_message(message, reply_message)
