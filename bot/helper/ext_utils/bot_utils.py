@@ -202,7 +202,7 @@ class EngineStatus:
 
 def get_readable_message():
     # msg = f'<b>{quote} ❤️</b>\n\n'
-    msg = "<a href='https://t.me/JetMirror'>𝑩𝒐𝒕 𝒃𝒚 🚀 𝑱𝒆𝒕-𝑴𝒊𝒓𝒓𝒐𝒓</a>\n"
+    msg = "<a href='https://t.me/SPA4KBRO'>𝑩𝒐𝒕 𝒃𝒚 SPARK</a>\n"
     button = None
     STATUS_LIMIT = config_dict['STATUS_LIMIT']
     tasks = len(download_dict)
